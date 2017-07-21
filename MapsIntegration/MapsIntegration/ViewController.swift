@@ -16,10 +16,10 @@ class ViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let latitude : CLLocationDegrees = 6.268844
-        let longitude : CLLocationDegrees = -75.666433
-        let latDelta : CLLocationDegrees = 12
-        let lonDelta : CLLocationDegrees = 12
+        let latitude : CLLocationDegrees = 6.268
+        let longitude : CLLocationDegrees = -75.666
+        let latDelta : CLLocationDegrees = 2
+        let lonDelta : CLLocationDegrees = 2
         
         let span : MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
         
