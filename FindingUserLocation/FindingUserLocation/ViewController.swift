@@ -30,18 +30,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         let userLocation : CLLocation = locations[0]
         
-        let latitude = userLocation.coordinate.latitude
-        let longitude = userLocation.coordinate.longitude
-        let latDelta : CLLocationDegrees = 0.5
-        let lonDelta : CLLocationDegrees = 0.5
+//        let latitude = userLocation.coordinate.latitude
+//        let longitude = userLocation.coordinate.longitude
+//        let latDelta : CLLocationDegrees = 0.5
+//        let lonDelta : CLLocationDegrees = 0.5
+//
+//        let span : MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
+//
+//        let location : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//
+//        let region : MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+//
+//        self.mapKit.setRegion(region, animated: true)
         
-        let span : MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
-        
-        let location : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        
-        let region : MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
-        
-        self.mapKit.setRegion(region, animated: true)
+        CLGeocoder().reverseGeocodeLocation(userLocation) { (placemarks, error) in
+            if error != nil {
+                print(error ?? "")
+            } else {
+                guard let placemark = placemarks?[0] else { return }
+                
+                guard let subThoroughFare = placemark.subThoroughfare, let thoroughFare = placemark.thoroughfare, let subLocality = placemark.subLocality, let subadministrativeArea = placemark.subAdministrativeArea, let postalCode = placemark.postalCode else
+                {
+                    return
+                }
+                
+                print(placemark)
+                print("Subthorough Fare: \(subThoroughFare), ThoroughFare: \(thoroughFare), Sublocality: \(subLocality), Subadministrative Area: \(subadministrativeArea), Postal code: \(postalCode)")
+            }
+        }
     }
 
 
